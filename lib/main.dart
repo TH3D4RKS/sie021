@@ -1,6 +1,5 @@
 import 'package:sie021/configs/app_settings.dart';
 import 'package:sie021/configs/hive_config.dart';
-import 'package:sie021/repositories/conta_repository.dart';
 import 'package:sie021/repositories/gta_repository.dart';
 import 'package:sie021/services/auth_service.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
@@ -26,10 +25,6 @@ void main() async {
           create: (context) => GtaRepository(),
           lazy: false,
         ),
-        ChangeNotifierProvider(
-            create: (context) => ContaRepository(
-                  gtas: context.read<GtaRepository>(),
-                )),
         ChangeNotifierProvider(create: (context) => AppSettings()),
       ],
       child: const MeuAplicativo(),

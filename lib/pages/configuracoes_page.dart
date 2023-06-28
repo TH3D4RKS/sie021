@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-import 'package:image_picker/image_picker.dart';
-//import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
-//import 'package:sie021/configs/app_settings.dart';
-import 'package:sie021/repositories/conta_repository.dart';
 import 'package:sie021/services/auth_service.dart';
 
 class ConfiguracoesPage extends StatefulWidget {
@@ -17,14 +10,8 @@ class ConfiguracoesPage extends StatefulWidget {
 }
 
 class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
-  XFile? comprovante;
-
   @override
   Widget build(BuildContext context) {
-    //final conta = context.watch<ContaRepository>();
-    //final loc = context.read<AppSettings>().locale;
-    //NumberFormat real =
-    // NumberFormat.currency(locale: loc['locale'], name: loc['name']);
     var usuario = context.read<AuthService>().usuario?.email;
     return Scaffold(
       appBar: AppBar(
@@ -44,7 +31,6 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
                   color: Colors.indigo,
                 ),
               ),
-              // trailing: IconButton(onPressed: updateSaldo, icon: const Icon(Icons.edit)),
             ),
             const Divider(),
             Expanded(
@@ -75,62 +61,6 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  selecionarComprovante() async {
-    final ImagePicker picker = ImagePicker();
-
-    try {
-      XFile? file = await picker.pickImage(source: ImageSource.gallery);
-      if (file != null) setState(() => comprovante = file);
-    } on Exception catch (e) {
-      debugPrint(e.toString());
-    }
-  }
-
-  updateSaldo() async {
-    final form = GlobalKey<FormState>();
-    final valor = TextEditingController();
-    final conta = context.read<ContaRepository>();
-
-    valor.text = conta.saldo.toString();
-
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Atualizar o Saldo'),
-        content: Form(
-          key: form,
-          child: TextFormField(
-            controller: valor,
-            keyboardType: TextInputType.number,
-            inputFormatters: [
-              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*')),
-            ],
-            validator: (value) {
-              if (value!.isEmpty) return 'Informe o valor do saldo';
-              return null;
-            },
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('CANCELAR'),
-          ),
-          TextButton(
-            onPressed: () {
-              if (form.currentState!.validate()) {
-                conta.setSaldo(double.parse(valor.text));
-
-                Navigator.of(context).pop();
-              }
-            },
-            child: const Text('SALVAR'),
-          ),
-        ],
       ),
     );
   }

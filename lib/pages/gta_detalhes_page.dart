@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
-import 'package:sie021/configs/app_settings.dart';
 import 'package:sie021/models/gta.dart';
-import 'package:sie021/repositories/conta_repository.dart';
 import 'package:sie021/services/auth_service.dart';
-// import 'package:social_share/social_share.dart';
 import 'package:flutter_share_me/flutter_share_me.dart';
 
 class GtasDetalhesPage extends StatefulWidget {
@@ -22,7 +17,6 @@ class GtasDetalhesPage extends StatefulWidget {
 class _GtasDetalhesPageState extends State<GtasDetalhesPage> {
   late NumberFormat real;
   double quantidade = 0;
-  late ContaRepository conta;
   Widget grafico = Container();
   bool graficoLoaded = false;
 
@@ -38,9 +32,6 @@ class _GtasDetalhesPageState extends State<GtasDetalhesPage> {
 
   @override
   Widget build(BuildContext context) {
-    readNumberFormat();
-    conta = Provider.of<ContaRepository>(context, listen: false);
-
     return Scaffold(
       appBar: AppBar(
         //widget.gta.nome +
@@ -113,10 +104,5 @@ class _GtasDetalhesPageState extends State<GtasDetalhesPage> {
         ),
       ),
     );
-  }
-
-  readNumberFormat() {
-    final loc = context.watch<AppSettings>().locale;
-    real = NumberFormat.currency(locale: loc['locale'], name: loc['name']);
   }
 }
