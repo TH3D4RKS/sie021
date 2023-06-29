@@ -18,28 +18,37 @@ class _EscanearPageState extends State<EscanearPage> {
   List<String> listaCodigoDeBarras = [];
 
   Future<void> _scanBarcode() async {
-    // String barcodeResult;
-    // try {
-    // barcodeResult = await FlutterBarcodeScanner.scanBarcode(
-    //   '#FF0000', // Cor personalizada para a linha de escaneamento
-    //   'Cancelar', // Texto do botão de cancelar
-    //   true, // Mostrar flash no scanner
-    //   ScanMode.BARCODE, // Modo de escaneamento (padrão)
-    // );
-    //  } catch (e) {
-    //   barcodeResult = 'Falha ao ler o código de barras: $e';
-    // }
+    String barcodeResult;
+    try {
+      barcodeResult = await FlutterBarcodeScanner.scanBarcode(
+        '#FF0000', // Cor personalizada para a linha de escaneamento
+        'Cancelar', // Texto do botão de cancelar
+        true, // Mostrar flash no scanner
+        ScanMode.BARCODE, // Modo de escaneamento (padrão)
+      );
+    } catch (e) {
+      barcodeResult = 'Falha ao ler o código de barras: $e';
+    }
 
     setState(() {
-      _barcodeResult = '11170536918040620230100000180000124499000494';
+      _barcodeResult = barcodeResult;
     });
   }
 
-  mostrarDupDetalhes(Gta gta) {
+  mostrarDupDetalhes(GtaDupl gtaDupl) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => GtasDupDetalhesPage(gta: gta),
+        builder: (_) => GtasDupDetalhesPage(gtaDupl: gtaDupl),
+      ),
+    );
+  }
+
+  mostrarViewDetalhes(Gta gta) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => GtasViewDetalhesPage(gta: gta),
       ),
     );
   }
@@ -74,9 +83,64 @@ class _EscanearPageState extends State<EscanearPage> {
           .get();
 
       if (querySnapshot.docs.isNotEmpty) {
+        FirebaseFirestore.instance
+            .collection('gtas_ok')
+            .where('numero_gta', isEqualTo: numeroGta)
+            .get()
+            .then((QuerySnapshot querySnapshot) {
+          querySnapshot.docs.forEach((data) {
+            String duplcodMunicipio = data['cod_municipio'];
+            String duplcodProp = data['cod_prop'];
+            String dupldataEmissao = data['data_emissao'];
+            String dupldataInsert = data['data_insert'];
+            String duplespecie = data['especie'];
+            String duplmod1 = data['mod1'];
+            String duplmod2 = data['mod2'];
+            String duplmod3 = data['mod3'];
+            String duplnumeroGta = data['numero_gta'];
+            String duplserie = data['serie'];
+            String dupltotalAnimais = data['total_animais'];
+            String dupluf = data['uf'];
+            String duplusuarioInsert = data['usuario_insert'];
+
+            GtaDupl gtadupl = GtaDupl(
+              duplcodMunicipio: duplcodMunicipio,
+              duplcodProp: duplcodProp,
+              dupldataEmissao: dupldataEmissao,
+              dupldataInsert: dupldataInsert,
+              duplespecie: duplespecie,
+              duplmod1: duplmod1,
+              duplmod2: duplmod2,
+              duplmod3: duplmod3,
+              duplnumeroGta: duplnumeroGta,
+              duplserie: duplserie,
+              dupltotalAnimais: dupltotalAnimais,
+              dupluf: dupluf,
+              duplusuarioInsert: duplusuarioInsert,
+            );
+            print(data);
+            mostrarDupDetalhes(gtadupl);
+          });
+        });
         // O código de barras foi encontrado no banco de dados
       } else {
         try {
+          Gta gta = Gta(
+            codMunicipio: codMunicipio,
+            codProp: codProp,
+            dataEmissao: dataEmissao,
+            dataInsert: dataInsert,
+            especie: especie,
+            mod1: mod1,
+            mod2: mod2,
+            mod3: mod3,
+            numeroGta: numeroGta,
+            serie: serie,
+            totalAnimais: totalAnimais,
+            uf: uf,
+            usuarioInsert: usuarioInsert,
+          );
+          mostrarViewDetalhes(gta);
           await firestore.collection('gtas_ok').add({
             'cod_municipio': codMunicipio,
             'cod_prop': codProp,
@@ -132,10 +196,116 @@ class _EscanearPageState extends State<EscanearPage> {
 }
 
 class GtasDupDetalhesPage extends StatelessWidget {
+  final GtaDupl gtaDupl;
+
+  const GtasDupDetalhesPage({Key? key, required this.gtaDupl})
+      : super(key: key);
+
+  tipo() {
+    if (gtaDupl.duplespecie == '01') {
+      String tipo = 'Bovino';
+      return tipo;
+    }
+  }
+
+  uf() {
+    for (var uf in estado) {
+      if (uf['cod_uf'] == gtaDupl.dupluf) {
+        String nomeuf = uf['nome'].toString();
+        return nomeuf;
+      }
+    }
+  }
+
+  municipio() {
+    for (var cidade in cidades) {
+      if (cidade['cod_cidade'] == gtaDupl.duplcodMunicipio) {
+        String nomecit = cidade['nome'].toString();
+        return nomecit;
+      }
+    }
+  }
+
+  final bgcolor = const Color.fromARGB(255, 245, 7, 7);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: bgcolor,
+      appBar: AppBar(
+        title: Text('Gta Duplicado Detalhes'),
+      ),
+      body: ListView(
+        children: [
+          Card(
+            child: ListTile(
+              title: Text('Código Gta'),
+              subtitle: Text('${gtaDupl.duplnumeroGta}'),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('Data de Emissão'),
+              subtitle: Text('${gtaDupl.dupldataEmissao}'),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('Município destino'),
+              subtitle: Text(municipio()),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('Estado'),
+              subtitle: Text(uf()),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('Código Propriedade'),
+              subtitle: Text('${gtaDupl.duplcodProp}'),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('Espécie'),
+              subtitle: Text(tipo()),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('Série'),
+              subtitle: Text('${gtaDupl.duplserie}'),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('Total de Animais'),
+              subtitle: Text('${gtaDupl.dupltotalAnimais}'),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('Usuário Inserção'),
+              subtitle: Text('${gtaDupl.duplusuarioInsert}'),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('Data de Inserção'),
+              subtitle: Text('${gtaDupl.dupldataInsert}'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class GtasViewDetalhesPage extends StatelessWidget {
   final Gta gta;
 
-  const GtasDupDetalhesPage({Key? key, required this.gta}) : super(key: key);
-
+  const GtasViewDetalhesPage({Key? key, required this.gta}) : super(key: key);
   tipo() {
     if (gta.especie == '01') {
       String tipo = 'Bovino';
@@ -165,7 +335,7 @@ class GtasDupDetalhesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Gta Duplicado Detalhes'),
+        title: Text('Detalhes do GTA'),
       ),
       body: ListView(
         children: [
@@ -183,7 +353,7 @@ class GtasDupDetalhesPage extends StatelessWidget {
           ),
           Card(
             child: ListTile(
-              title: Text('Município'),
+              title: Text('Município Destino'),
               subtitle: Text(municipio()),
             ),
           ),

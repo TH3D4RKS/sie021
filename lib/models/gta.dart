@@ -32,3 +32,36 @@ class Gta {
 
   static fromSnapshot(QueryDocumentSnapshot<Object?> doc) {}
 }
+
+class GtaDupl {
+  String duplcodMunicipio;
+  String duplcodProp;
+  String dupldataEmissao;
+  String dupldataInsert;
+  String duplespecie;
+  String duplmod1;
+  String duplmod2;
+  String duplmod3;
+  String duplnumeroGta;
+  String duplserie;
+  String dupltotalAnimais;
+  String dupluf;
+  String duplusuarioInsert;
+  GtaDupl({
+    required this.duplcodMunicipio,
+    required this.duplcodProp,
+    required this.dupldataEmissao,
+    required this.dupldataInsert,
+    required this.duplespecie,
+    required this.duplmod1,
+    required this.duplmod2,
+    required this.duplmod3,
+    required this.duplnumeroGta,
+    required this.duplserie,
+    required this.dupltotalAnimais,
+    required this.dupluf,
+    required this.duplusuarioInsert,
+  });
+
+  static fromSnapshot(QueryDocumentSnapshot<Object?> doc) {}
+}

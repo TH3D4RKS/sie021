@@ -153,7 +153,7 @@ class GtasDetalhesPage extends StatelessWidget {
           ),
           Card(
             child: ListTile(
-              title: Text('Município'),
+              title: Text('Município Destino'),
               subtitle: Text(municipio()),
             ),
           ),
