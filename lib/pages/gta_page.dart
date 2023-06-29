@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sie021/cidades/cidades.dart';
 import 'package:sie021/models/gta.dart';
 
 class GtasPage extends StatefulWidget {
@@ -105,6 +106,30 @@ class GtasDetalhesPage extends StatelessWidget {
   final Gta gta;
 
   const GtasDetalhesPage({Key? key, required this.gta}) : super(key: key);
+  tipo() {
+    if (gta.especie == '01') {
+      String tipo = 'Bovino';
+      return tipo;
+    }
+  }
+
+  uf() {
+    for (var uf in estado) {
+      if (uf['cod_uf'] == gta.uf) {
+        String nomeuf = uf['nome'].toString();
+        return nomeuf;
+      }
+    }
+  }
+
+  municipio() {
+    for (var cidade in cidades) {
+      if (cidade['cod_cidade'] == gta.codMunicipio) {
+        String nomecit = cidade['nome'].toString();
+        return nomecit;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,26 +137,69 @@ class GtasDetalhesPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Detalhes do GTA'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Código Município: ${gta.codMunicipio}'),
-            Text('Código Prop: ${gta.codProp}'),
-            Text('Data de Emissão: ${gta.dataEmissao}'),
-            Text('Data de Inserção: ${gta.dataInsert}'),
-            Text('Espécie: ${gta.especie}'),
-            Text('Mod1: ${gta.mod1}'),
-            Text('Mod2: ${gta.mod2}'),
-            Text('Mod3: ${gta.mod3}'),
-            Text('Número GTA: ${gta.numeroGta}'),
-            Text('Série: ${gta.serie}'),
-            Text('Total de Animais: ${gta.totalAnimais}'),
-            Text('UF: ${gta.uf}'),
-            Text('Usuário Inserção: ${gta.usuarioInsert}'),
-          ],
-        ),
+      body: ListView(
+        children: [
+          Card(
+            child: ListTile(
+              title: Text('Código Gta'),
+              subtitle: Text('${gta.numeroGta}'),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('Data de Emissão'),
+              subtitle: Text('${gta.dataEmissao}'),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('Município'),
+              subtitle: Text(municipio()),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('Estado'),
+              subtitle: Text(uf()),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('Código Propriedade'),
+              subtitle: Text('${gta.codProp}'),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('Espécie'),
+              subtitle: Text(tipo()),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('Série'),
+              subtitle: Text('${gta.serie}'),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('Total de Animais'),
+              subtitle: Text('${gta.totalAnimais}'),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('Usuário Inserção'),
+              subtitle: Text('${gta.usuarioInsert}'),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('Data de Inserção'),
+              subtitle: Text('${gta.dataInsert}'),
+            ),
+          ),
+        ],
       ),
     );
   }

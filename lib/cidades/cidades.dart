@@ -1,3 +1,32 @@
+List<Map<String, String>> estado = [
+  {'cod_uf': '11', 'nome': 'Rondônia'},
+  {'cod_uf': '12', 'nome': 'Acre'},
+  {'cod_uf': '13', 'nome': 'Amazonas'},
+  {'cod_uf': '14', 'nome': 'Roraima'},
+  {'cod_uf': '15', 'nome': 'Pará'},
+  {'cod_uf': '16', 'nome': 'Amapá'},
+  {'cod_uf': '17', 'nome': 'Tocantins'},
+  {'cod_uf': '21', 'nome': 'Maranhão'},
+  {'cod_uf': '22', 'nome': 'Piauí'},
+  {'cod_uf': '23', 'nome': 'Ceará'},
+  {'cod_uf': '24', 'nome': 'Rio Grande do Norte'},
+  {'cod_uf': '25', 'nome': 'Paraíba'},
+  {'cod_uf': '26', 'nome': 'Pernambuco'},
+  {'cod_uf': '27', 'nome': 'Alagoas'},
+  {'cod_uf': '28', 'nome': 'Sergipe'},
+  {'cod_uf': '29', 'nome': 'Bahia'},
+  {'cod_uf': '31', 'nome': 'Minas Gerais'},
+  {'cod_uf': '32', 'nome': 'Espírito Santo'},
+  {'cod_uf': '33', 'nome': 'Rio de Janeiro'},
+  {'cod_uf': '35', 'nome': 'São Paulo'},
+  {'cod_uf': '41', 'nome': 'Paraná'},
+  {'cod_uf': '42', 'nome': 'Santa Catarina'},
+  {'cod_uf': '43', 'nome': 'Rio Grande do Sul'},
+  {'cod_uf': '50', 'nome': 'Mato Grosso do Sul'},
+  {'cod_uf': '51', 'nome': 'Mato Grosso'},
+  {'cod_uf': '52', 'nome': 'Goiás'},
+  {'cod_uf': '53', 'nome': 'Distrito Federal'}
+];
 List<Map<String, String>> cidades = [
   {"cod_estado": "11", "cod_cidade": "00015", "nome": "Alta Floresta D'Oeste"},
   {
