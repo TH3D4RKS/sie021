@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
         onPageChanged: setPaginaAtual,
         children: const [
           GtasPage(),
-          FavoritasPage(),
+          EscanearPage(),
           ConfiguracoesPage(),
         ],
       ),

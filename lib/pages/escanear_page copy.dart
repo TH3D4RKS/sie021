@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class FavoritasPage extends StatefulWidget {
-  const FavoritasPage({Key? key}) : super(key: key);
+class EscanearPage extends StatefulWidget {
+  const EscanearPage({Key? key}) : super(key: key);
 
   @override
-  State<FavoritasPage> createState() => _FavoritasPageState();
+  State<EscanearPage> createState() => _EscanearPageState();
 }
 
-class _FavoritasPageState extends State<FavoritasPage> {
+class _EscanearPageState extends State<EscanearPage> {
   @override
   @override
   Widget build(BuildContext context) {
