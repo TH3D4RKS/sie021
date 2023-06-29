@@ -1,29 +1,34 @@
-class Gta {
-  String baseId;
-  String icone;
-  String nome;
-  String sigla;
-  double preco;
-  DateTime timestamp;
-  double mudancaHora;
-  double mudancaDia;
-  double mudancaSemana;
-  double mudancaMes;
-  double mudancaAno;
-  double mudancaPeriodoTotal;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
+class Gta {
+  String codMunicipio;
+  String codProp;
+  String dataEmissao;
+  String dataInsert;
+  String especie;
+  String mod1;
+  String mod2;
+  String mod3;
+  String numeroGta;
+  String serie;
+  String totalAnimais;
+  String uf;
+  String usuarioInsert;
   Gta({
-    required this.baseId,
-    required this.icone,
-    required this.nome,
-    required this.sigla,
-    required this.preco,
-    required this.timestamp,
-    required this.mudancaHora,
-    required this.mudancaDia,
-    required this.mudancaSemana,
-    required this.mudancaMes,
-    required this.mudancaAno,
-    required this.mudancaPeriodoTotal,
+    required this.codMunicipio,
+    required this.codProp,
+    required this.dataEmissao,
+    required this.dataInsert,
+    required this.especie,
+    required this.mod1,
+    required this.mod2,
+    required this.mod3,
+    required this.numeroGta,
+    required this.serie,
+    required this.totalAnimais,
+    required this.uf,
+    required this.usuarioInsert,
   });
+
+  static fromSnapshot(QueryDocumentSnapshot<Object?> doc) {}
 }

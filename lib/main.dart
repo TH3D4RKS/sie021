@@ -1,6 +1,3 @@
-import 'package:sie021/configs/app_settings.dart';
-import 'package:sie021/configs/hive_config.dart';
-import 'package:sie021/repositories/gta_repository.dart';
 import 'package:sie021/services/auth_service.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,7 +8,6 @@ import 'sie_aplicativo.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await HiveConfig.start();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -19,14 +15,7 @@ void main() async {
 
   runApp(
     MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => AuthService()),
-        ChangeNotifierProvider(
-          create: (context) => GtaRepository(),
-          lazy: false,
-        ),
-        ChangeNotifierProvider(create: (context) => AppSettings()),
-      ],
+      providers: [ChangeNotifierProvider(create: (context) => AuthService())],
       child: const MeuAplicativo(),
     ),
   );

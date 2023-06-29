@@ -25,7 +25,6 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
               title: const Text('Usuario'),
               subtitle: Text(
                 usuario.toString(),
-                // real.format(conta.saldo),
                 style: const TextStyle(
                   fontSize: 25,
                   color: Colors.indigo,
