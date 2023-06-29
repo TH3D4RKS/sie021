@@ -74,24 +74,7 @@ class _EscanearPageState extends State<EscanearPage> {
           .get();
 
       if (querySnapshot.docs.isNotEmpty) {
-        Gta gta = Gta(
-          codMunicipio: codMunicipio,
-          codProp: codProp,
-          dataEmissao: dataEmissao,
-          dataInsert: dataInsert,
-          especie: especie,
-          mod1: mod1,
-          mod2: mod2,
-          mod3: mod3,
-          numeroGta: numeroGta,
-          serie: serie,
-          totalAnimais: totalAnimais,
-          uf: uf,
-          usuarioInsert: usuarioInsert,
-        );
-        mostrarDupDetalhes(gta);
         // O código de barras foi encontrado no banco de dados
-        throw EscanearPage();
       } else {
         try {
           await firestore.collection('gtas_ok').add({
