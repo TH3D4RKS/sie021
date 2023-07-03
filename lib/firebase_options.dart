@@ -52,7 +52,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '952077368785',
     projectId: 'sie021-f9950',
     authDomain: 'sie021-f9950.firebaseapp.com',
-    databaseURL: 'https://sie021-f9950-default-rtdb.firebaseio.com',
     storageBucket: 'sie021-f9950.appspot.com',
     measurementId: 'G-0THVQ0D8XW',
   );
@@ -62,7 +61,6 @@ class DefaultFirebaseOptions {
     appId: '1:952077368785:android:a37dcf0b24cf4a23dfb4f0',
     messagingSenderId: '952077368785',
     projectId: 'sie021-f9950',
-    databaseURL: 'https://sie021-f9950-default-rtdb.firebaseio.com',
     storageBucket: 'sie021-f9950.appspot.com',
   );
 
@@ -71,9 +69,9 @@ class DefaultFirebaseOptions {
     appId: '1:952077368785:ios:e0e6cb269bd3d850dfb4f0',
     messagingSenderId: '952077368785',
     projectId: 'sie021-f9950',
-    databaseURL: 'https://sie021-f9950-default-rtdb.firebaseio.com',
     storageBucket: 'sie021-f9950.appspot.com',
-    iosClientId: '952077368785-dv7q1glru37qfvfggeqmtqbl1obpvlk6.apps.googleusercontent.com',
+    iosClientId:
+        '952077368785-dv7q1glru37qfvfggeqmtqbl1obpvlk6.apps.googleusercontent.com',
     iosBundleId: 'com.mycompany.sie021',
   );
 }
