@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
-
+import 'package:vibration/vibration.dart';
 import '../cidades/cidades.dart';
 import '../models/gta.dart';
 
@@ -38,11 +38,11 @@ class _EscanearPageState extends State<EscanearPage> {
     _salvar();
   }
 
-  mostrarDupDetalhes(GtaDupl gtaDupl) {
+  mostrarDupDetalhes(GtaDupl gtadupl) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => GtasDupDetalhesPage(gtaDupl: gtaDupl),
+        builder: (_) => GtasDupDetalhesPage(gtaDupl: gtadupl),
       ),
     );
   }
@@ -60,7 +60,6 @@ class _EscanearPageState extends State<EscanearPage> {
     if (_codigo.length == 44) {
       String userr = FirebaseAuth.instance.currentUser!.email.toString();
       DateTime dataAtual = DateTime.now();
-
       String dataFormatada = DateFormat('dd/MM/yyyy').format(dataAtual);
 
       FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -77,7 +76,6 @@ class _EscanearPageState extends State<EscanearPage> {
       String codProp = _barcodeResult.substring(29, 38);
       String codMunicipio = _barcodeResult.substring(38, 43);
       String mod3 = _barcodeResult.substring(43);
-
       String dataInsert = dataFormatada;
       String? usuarioInsert = userr;
       try {
@@ -92,11 +90,12 @@ class _EscanearPageState extends State<EscanearPage> {
               .where('numero_gta', isEqualTo: numeroGta)
               .get()
               .then((QuerySnapshot querySnapshot) {
-            querySnapshot.docs.forEach((data) {
+            querySnapshot.docs.forEach((data) async {
               String duplcodMunicipio = data['cod_municipio'];
               String duplcodProp = data['cod_prop'];
               String dupldataEmissao = data['data_emissao'];
               String dupldataInsert = data['data_insert'];
+              String datadupli = '';
               String duplespecie = data['especie'];
               String duplmod1 = data['mod1'];
               String duplmod2 = data['mod2'];
@@ -112,6 +111,7 @@ class _EscanearPageState extends State<EscanearPage> {
                 duplcodProp: duplcodProp,
                 dupldataEmissao: dupldataEmissao,
                 dupldataInsert: dupldataInsert,
+                datadupli: datadupli,
                 duplespecie: duplespecie,
                 duplmod1: duplmod1,
                 duplmod2: duplmod2,
@@ -122,8 +122,30 @@ class _EscanearPageState extends State<EscanearPage> {
                 dupluf: dupluf,
                 duplusuarioInsert: duplusuarioInsert,
               );
-              print(data);
+
+              Vibration.vibrate(pattern: [1, 1000, 500, 2000], amplitude: 128);
+
               mostrarDupDetalhes(gtadupl);
+              try {
+                await firestore.collection('gtas').add({
+                  'cod_municipio': codMunicipio,
+                  'cod_prop': codProp,
+                  'data_emissao': dataEmissao,
+                  'data_insert': dataInsert,
+                  'data_dupli': dataFormatada,
+                  'especie': especie,
+                  'mod1': mod1,
+                  'mod2': mod2,
+                  'mod3': mod3,
+                  'numero_gta': numeroGta,
+                  'serie': serie,
+                  'total_animais': totalAnimais,
+                  'uf': uf,
+                  'usuario_insert': usuarioInsert,
+                });
+              } catch (e) {
+                return print(e.toString());
+              }
             });
           });
           // O código de barras foi encontrado no banco de dados
@@ -170,10 +192,8 @@ class _EscanearPageState extends State<EscanearPage> {
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Codigo de Barras Invaflido'),
-        backgroundColor: const Color.fromARGB(255, 245, 7, 7),
-        duration: Duration(seconds: 10),
-      ));
+          content: Text('Codigo de Barras Invalido'),
+          backgroundColor: const Color.fromARGB(255, 245, 7, 7)));
     }
   }
 
@@ -189,16 +209,17 @@ class _EscanearPageState extends State<EscanearPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(_barcodeResult),
+            Text(_codigo),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: _scanBarcode,
               child: Text('Escanear Código de Barras'),
             ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _salvar,
-              child: Text('Salvar'),
-            ),
+            //  SizedBox(height: 20),
+            //  ElevatedButton(
+            //   onPressed: _salvar,
+            // child: Text('Salvar'),
+            //),
           ],
         ),
       ),

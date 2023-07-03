@@ -1,6 +1,8 @@
 import 'package:sie021/pages/configuracoes_page.dart';
 import 'package:sie021/pages/escanear_page.dart';
 import 'package:sie021/pages/gta_page.dart';
+import 'package:sie021/pages/gtaDupli_page.dart';
+
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -36,6 +38,7 @@ class _HomePageState extends State<HomePage> {
         children: const [
           GtasPage(),
           EscanearPage(),
+          GtasDupliPage(),
           ConfiguracoesPage(),
         ],
       ),
@@ -46,6 +49,7 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(icon: Icon(Icons.list), label: 'GTAs'),
           BottomNavigationBarItem(
               icon: Icon(Icons.qr_code_2), label: 'Escanear'),
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Duplicados'),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Conta'),
         ],
         onTap: (pagina) {

@@ -49,47 +49,49 @@ class _GtasPageState extends State<GtasPage> {
                 itemBuilder: (context, index) {
                   Map<String, dynamic> data =
                       documents[index].data() as Map<String, dynamic>;
+                  if (data.isNotEmpty) {
+                    // Extracting data from Firestore documents
+                    String codMunicipio = data['cod_municipio'];
+                    String codProp = data['cod_prop'];
+                    String dataEmissao = data['data_emissao'];
+                    String dataInsert = data['data_insert'];
+                    String especie = data['especie'];
+                    String mod1 = data['mod1'];
+                    String mod2 = data['mod2'];
+                    String mod3 = data['mod3'];
+                    String numeroGta = data['numero_gta'];
+                    String serie = data['serie'];
+                    String totalAnimais = data['total_animais'];
+                    String uf = data['uf'];
+                    String usuarioInsert = data['usuario_insert'];
 
-                  // Extracting data from Firestore documents
-                  String codMunicipio = data['cod_municipio'];
-                  String codProp = data['cod_prop'];
-                  String dataEmissao = data['data_emissao'];
-                  String dataInsert = data['data_insert'];
-                  String especie = data['especie'];
-                  String mod1 = data['mod1'];
-                  String mod2 = data['mod2'];
-                  String mod3 = data['mod3'];
-                  String numeroGta = data['numero_gta'];
-                  String serie = data['serie'];
-                  String totalAnimais = data['total_animais'];
-                  String uf = data['uf'];
-                  String usuarioInsert = data['usuario_insert'];
-
-                  return Card(
-                    child: ListTile(
-                      title: Text('Código Gta: $numeroGta'),
-                      subtitle: Text('Data de Emissão: $dataEmissao'),
-                      trailing: Icon(Icons.more_vert),
-                      onTap: () {
-                        Gta gta = Gta(
-                          codMunicipio: codMunicipio,
-                          codProp: codProp,
-                          dataEmissao: dataEmissao,
-                          dataInsert: dataInsert,
-                          especie: especie,
-                          mod1: mod1,
-                          mod2: mod2,
-                          mod3: mod3,
-                          numeroGta: numeroGta,
-                          serie: serie,
-                          totalAnimais: totalAnimais,
-                          uf: uf,
-                          usuarioInsert: usuarioInsert,
-                        );
-                        mostrarDetalhes(gta);
-                      },
-                    ),
-                  );
+                    return Card(
+                      child: ListTile(
+                        title: Text('Código Gta: $numeroGta'),
+                        subtitle: Text('Data de Emissão: $dataEmissao'),
+                        trailing: Icon(Icons.more_vert),
+                        onTap: () {
+                          Gta gta = Gta(
+                            codMunicipio: codMunicipio,
+                            codProp: codProp,
+                            dataEmissao: dataEmissao,
+                            dataInsert: dataInsert,
+                            especie: especie,
+                            mod1: mod1,
+                            mod2: mod2,
+                            mod3: mod3,
+                            numeroGta: numeroGta,
+                            serie: serie,
+                            totalAnimais: totalAnimais,
+                            uf: uf,
+                            usuarioInsert: usuarioInsert,
+                          );
+                          mostrarDetalhes(gta);
+                        },
+                      ),
+                    );
+                  }
+                  return Card(child: ListTile(title: Text('NADA POR AQUI :)')));
                 },
               ),
             );

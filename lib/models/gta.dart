@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+//return Scaffold(
+//          appBar: appBarDinamica(),
+//          body: Card(child: ListTile(title: Text('NADA POR AQUI :)'))));
 class Gta {
   String codMunicipio;
   String codProp;
@@ -38,6 +41,7 @@ class GtaDupl {
   String duplcodProp;
   String dupldataEmissao;
   String dupldataInsert;
+  String datadupli;
   String duplespecie;
   String duplmod1;
   String duplmod2;
@@ -52,6 +56,7 @@ class GtaDupl {
     required this.duplcodProp,
     required this.dupldataEmissao,
     required this.dupldataInsert,
+    required this.datadupli,
     required this.duplespecie,
     required this.duplmod1,
     required this.duplmod2,
