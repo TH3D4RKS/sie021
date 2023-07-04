@@ -1,6 +1,6 @@
 // import 'package:sie021/pages/home_page.dart';
-import 'package:sie021/pages/home_page.dart';
-import 'package:sie021/pages/login_page.dart';
+import 'package:sie021/pages/home/home_page.dart';
+import 'package:sie021/pages/home/login_page.dart';
 import 'package:sie021/services/auth_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

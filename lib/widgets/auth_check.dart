@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sie021/pages/home_page.dart';
-import 'package:sie021/pages/login_page.dart';
+import 'package:sie021/pages/home/home_page.dart';
+import 'package:sie021/pages/home/login_page.dart';
 import 'package:sie021/services/auth_service.dart';
 
 class AuthCheck extends StatefulWidget {

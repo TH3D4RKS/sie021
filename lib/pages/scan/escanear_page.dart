@@ -4,9 +4,9 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:vibration/vibration.dart';
-import '../models/gta.dart';
-import 'normais/gta_view_detalhes.dart';
-import 'duplicados/gtas_view_dupli_detalhes.dart';
+import '../../models/gta.dart';
+import '../normais/gta_view_detalhes.dart';
+import '../duplicados/gtas_view_dupli_detalhes.dart';
 
 class EscanearPage extends StatefulWidget {
   const EscanearPage({Key? key}) : super(key: key);

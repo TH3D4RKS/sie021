@@ -1,8 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-//return Scaffold(
-//          appBar: appBarDinamica(),
-//          body: Card(child: ListTile(title: Text('NADA POR AQUI :)'))));
 class Gta {
   String codMunicipio;
   String codProp;

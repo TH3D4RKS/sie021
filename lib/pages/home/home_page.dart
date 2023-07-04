@@ -1,6 +1,6 @@
-import 'package:sie021/pages/configuracoes_page.dart';
+import 'package:sie021/pages/config/configuracoes_page.dart';
 import 'package:sie021/pages/duplicados/gta_dupli_page.dart';
-import 'package:sie021/pages/escanear_page.dart';
+import 'package:sie021/pages/scan/escanear_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:sie021/pages/normais/gta_page.dart';

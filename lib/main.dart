@@ -1,6 +1,6 @@
 import 'package:sie021/services/auth_service.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'fire_config/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'sie_aplicativo.dart';
