@@ -194,7 +194,7 @@ class _EscanearPageState extends State<EscanearPage> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text('Codigo de Barras Invalido'),
-          backgroundColor: const Color.fromARGB(255, 245, 7, 7)));
+          backgroundColor: const Color.fromARGB(255, 255, 0, 0)));
     }
   }
 

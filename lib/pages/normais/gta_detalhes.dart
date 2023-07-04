@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../cidades/cidades.dart';
-import '../models/gta.dart';
+import '../../cidades/cidades.dart';
+import '../../models/gta.dart';
 
 class GtasDetalhesPage extends StatelessWidget {
   final Gta gta;

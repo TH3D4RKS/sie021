@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sie021/models/gta.dart';
-import 'package:sie021/pages/gta_detalhes.dart';
+import 'package:sie021/pages/normais/gta_detalhes.dart';
 
 class GtasPage extends StatefulWidget {
   const GtasPage({Key? key}) : super(key: key);
@@ -12,11 +11,6 @@ class GtasPage extends StatefulWidget {
 }
 
 class _GtasPageState extends State<GtasPage> {
-  late List<Gta> tabela;
-  late NumberFormat real;
-  List<Gta> selecionadas = [];
-  late Map<String, String> loc;
-
   appBarDinamica() {
     return AppBar(title: const Text('Sie 021'), actions: []);
   }
@@ -31,17 +25,21 @@ class _GtasPageState extends State<GtasPage> {
   }
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) => StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('gtas_ok').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<QueryDocumentSnapshot> documents = snapshot.data!.docs;
-
+            if (documents.isEmpty) {
+              return Column(
+                children: [
+                  appBarDinamica(),
+                  ListTile(
+                    title: Text('Nada por Aki :('),
+                  )
+                ],
+              );
+            }
             return Scaffold(
               appBar: appBarDinamica(),
               body: ListView.builder(
@@ -50,6 +48,7 @@ class _GtasPageState extends State<GtasPage> {
                   Map<String, dynamic> data =
                       documents[index].data() as Map<String, dynamic>;
                   if (data.isNotEmpty) {
+                    print('entrou no builder');
                     // Extracting data from Firestore documents
                     String codMunicipio = data['cod_municipio'];
                     String codProp = data['cod_prop'];
@@ -91,14 +90,20 @@ class _GtasPageState extends State<GtasPage> {
                       ),
                     );
                   }
-                  return Card(child: ListTile(title: Text('NADA POR AQUI :)')));
+                  print("aki");
+                  return null;
                 },
               ),
             );
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            return CircularProgressIndicator();
+            return Column(
+              children: [
+                appBarDinamica(),
+                CircularProgressIndicator(),
+              ],
+            );
           }
         },
       );

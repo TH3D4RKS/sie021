@@ -11,10 +11,6 @@ class GtasDupliPage extends StatefulWidget {
 }
 
 class _GtasDupliPageState extends State<GtasDupliPage> {
-  late List<GtaDupl> tabela;
-  List<GtaDupl> selecionadas = [];
-  late Map<String, String> loc;
-
   appBarDinamica() {
     return AppBar(title: const Text('GTAs Duplicadas'), actions: []);
   }
@@ -39,7 +35,16 @@ class _GtasDupliPageState extends State<GtasDupliPage> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<QueryDocumentSnapshot> documents = snapshot.data!.docs;
-
+            if (documents.isEmpty) {
+              return Column(
+                children: [
+                  appBarDinamica(),
+                  ListTile(
+                    title: Text('Nada por Aki :('),
+                  )
+                ],
+              );
+            }
             return Scaffold(
               appBar: appBarDinamica(),
               body: ListView.builder(
@@ -115,7 +120,13 @@ class _GtasDupliPageState extends State<GtasDupliPage> {
                 title: Text('Código Gta'),
               ),
             );
-            return CircularProgressIndicator();
+
+            return Column(
+              children: [
+                appBarDinamica(),
+                CircularProgressIndicator(),
+              ],
+            );
           }
         },
       );

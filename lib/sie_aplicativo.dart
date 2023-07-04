@@ -6,14 +6,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MeuAplicativo extends StatefulWidget {
-  const MeuAplicativo({Key? key}) : super(key: key);
+class MainApp extends StatefulWidget {
+  const MainApp({Key? key}) : super(key: key);
 
   @override
-  State<MeuAplicativo> createState() => _MeuAplicativoState();
+  State<MainApp> createState() => _MainAppState();
 }
 
-class _MeuAplicativoState extends State<MeuAplicativo> {
+class _MainAppState extends State<MainApp> {
   final GlobalKey<NavigatorState> _navigator = GlobalKey<NavigatorState>();
 
   checkAuth() {
@@ -100,17 +100,6 @@ class _MeuAplicativoState extends State<MeuAplicativo> {
           ],
         );
       },
-
-      // initialRoute: '/loading',
-      // routes: <String, WidgetBuilder>{
-      //   '/loading': (context) => const Scaffold(
-      //         body: Center(
-      //           child: CircularProgressIndicator(),
-      //         ),
-      //       ),
-      //   '/home': (context) => const HomePage(),
-      //   '/login': (context) => const LoginPage(),
-      // },
     );
   }
 }

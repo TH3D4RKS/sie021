@@ -1,9 +1,9 @@
 import 'package:sie021/pages/configuracoes_page.dart';
+import 'package:sie021/pages/duplicados/gta_dupli_page.dart';
 import 'package:sie021/pages/escanear_page.dart';
-import 'package:sie021/pages/gta_page.dart';
-import 'package:sie021/pages/gtaDupli_page.dart';
 
 import 'package:flutter/material.dart';
+import 'package:sie021/pages/normais/gta_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
             curve: Curves.ease,
           );
         },
-        // backgroundColor: Colors.grey[100],
+        //backgroundColor: Colors.grey[100],
       ),
     );
   }
