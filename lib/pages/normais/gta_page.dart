@@ -48,7 +48,6 @@ class _GtasPageState extends State<GtasPage> {
                   Map<String, dynamic> data =
                       documents[index].data() as Map<String, dynamic>;
                   if (data.isNotEmpty) {
-                    print('entrou no builder');
                     // Extracting data from Firestore documents
                     String codMunicipio = data['cod_municipio'];
                     String codProp = data['cod_prop'];

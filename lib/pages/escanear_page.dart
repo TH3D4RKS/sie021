@@ -5,8 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:vibration/vibration.dart';
 import '../models/gta.dart';
-import 'duplicados/gta_dupli_view_detalhes.dart';
-import 'duplicados/gtas_dupli_detalhes.dart';
+import 'normais/gta_view_detalhes.dart';
+import 'duplicados/gtas_view_dupli_detalhes.dart';
 
 class EscanearPage extends StatefulWidget {
   const EscanearPage({Key? key}) : super(key: key);
@@ -43,7 +43,7 @@ class _EscanearPageState extends State<EscanearPage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => GtasDupDetalhesPage(gtaDupl: gtadupl),
+        builder: (_) => GtasViewDupliDetalhesPage(gtaDupl: gtadupl),
       ),
     );
   }

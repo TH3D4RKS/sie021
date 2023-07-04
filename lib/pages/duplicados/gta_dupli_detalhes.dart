@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import '../../cidades/cidades.dart';
 import '../../models/gta.dart';
 
-class GtasDupDetalhesPage extends StatelessWidget {
-  final GtaDupl gtaDupl;
+class GtasDupliDetalhesPage extends StatelessWidget {
+  final GtaDupl gtadupl;
 
-  const GtasDupDetalhesPage({Key? key, required this.gtaDupl})
+  const GtasDupliDetalhesPage({Key? key, required this.gtadupl})
       : super(key: key);
-
   tipo() {
-    if (gtaDupl.duplespecie == '01') {
+    if (gtadupl.duplespecie == '01') {
       String tipo = 'Bovino';
       return tipo;
     }
@@ -18,7 +17,7 @@ class GtasDupDetalhesPage extends StatelessWidget {
 
   uf() {
     for (var uf in estado) {
-      if (uf['cod_uf'] == gtaDupl.dupluf) {
+      if (uf['cod_uf'] == gtadupl.dupluf) {
         String nomeuf = uf['nome'].toString();
         return nomeuf;
       }
@@ -27,38 +26,48 @@ class GtasDupDetalhesPage extends StatelessWidget {
 
   municipio() {
     for (var cidade in cidades) {
-      if (cidade['cod_cidade'] == gtaDupl.duplcodMunicipio) {
+      if (cidade['cod_cidade'] == gtadupl.duplcodMunicipio) {
         String nomecit = cidade['nome'].toString();
         return nomecit;
       }
     }
   }
 
-  final bgcolor = const Color.fromARGB(255, 245, 7, 7);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgcolor,
       appBar: AppBar(
-        title: Text('Gta Duplicado Detalhes'),
+        title: Text('Detalhes do GTA Duplicado'),
       ),
       body: ListView(
         children: [
           Card(
             child: ListTile(
               title: Text('Código Gta'),
-              subtitle: Text('${gtaDupl.duplnumeroGta}'),
+              subtitle: Text('${gtadupl.duplnumeroGta}'),
             ),
           ),
           Card(
             child: ListTile(
               title: Text('Data de Emissão'),
-              subtitle: Text('${gtaDupl.dupldataEmissao}'),
+              subtitle: Text('${gtadupl.dupldataEmissao}'),
             ),
           ),
           Card(
             child: ListTile(
-              title: Text('Município destino'),
+              title: Text('Data de Inserção'),
+              subtitle: Text('${gtadupl.dupldataInsert}'),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('Data Duplicação'),
+              subtitle: Text('${gtadupl.datadupli}'),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text('Município Destino'),
               subtitle: Text(municipio()),
             ),
           ),
@@ -71,7 +80,7 @@ class GtasDupDetalhesPage extends StatelessWidget {
           Card(
             child: ListTile(
               title: Text('Código Propriedade'),
-              subtitle: Text('${gtaDupl.duplcodProp}'),
+              subtitle: Text('${gtadupl.duplcodProp}'),
             ),
           ),
           Card(
@@ -83,25 +92,19 @@ class GtasDupDetalhesPage extends StatelessWidget {
           Card(
             child: ListTile(
               title: Text('Série'),
-              subtitle: Text('${gtaDupl.duplserie}'),
+              subtitle: Text('${gtadupl.duplserie}'),
             ),
           ),
           Card(
             child: ListTile(
               title: Text('Total de Animais'),
-              subtitle: Text('${gtaDupl.dupltotalAnimais}'),
+              subtitle: Text('${gtadupl.dupltotalAnimais}'),
             ),
           ),
           Card(
             child: ListTile(
               title: Text('Usuário Inserção'),
-              subtitle: Text('${gtaDupl.duplusuarioInsert}'),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text('Data de Inserção'),
-              subtitle: Text('${gtaDupl.dupldataInsert}'),
+              subtitle: Text('${gtadupl.duplusuarioInsert}'),
             ),
           ),
         ],
