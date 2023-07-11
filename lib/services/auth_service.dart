@@ -34,11 +34,11 @@ class AuthService extends ChangeNotifier {
       _getUser();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        throw AuthException('Email não encontrado.');
+        throw AuthException('Email ou Senha incorretos. Tente novamente.');
       } else if (e.code == 'wrong-password') {
-        throw AuthException('Senha incorreta. Tente novamente');
+        throw AuthException('Email ou Senha incorretos. Tente novamente.');
       } else if (e.code == 'user-disabled') {
-        throw AuthException('Usuario Desabilitado Pelo Adiministrador');
+        throw AuthException('Usuario Desabilitado Pelo Adiministrador.');
       }
     }
   }
