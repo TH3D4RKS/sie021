@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                     controller: email,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Email',
+                      labelText: 'E-mail',
                     ),
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {

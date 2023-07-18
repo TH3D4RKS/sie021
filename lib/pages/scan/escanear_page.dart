@@ -17,7 +17,6 @@ class EscanearPage extends StatefulWidget {
 class _EscanearPageState extends State<EscanearPage> {
   String _barcodeResult = 'Aguardando leitura do código de barras......';
   String _codigo = '';
-  List<String> listaCodigoDeBarras = [];
 
   Future<void> _scanBarcode() async {
     String barcodeResult;
@@ -126,6 +125,7 @@ class _EscanearPageState extends State<EscanearPage> {
 
               Vibration.vibrate(pattern: [1, 1000, 500, 2000], amplitude: 128);
 
+              // O código de barras foi encontrado no banco de dados
               mostrarDupDetalhes(gtadupl);
               try {
                 await firestore.collection('gtas').add({
@@ -149,7 +149,6 @@ class _EscanearPageState extends State<EscanearPage> {
               }
             });
           });
-          // O código de barras foi encontrado no banco de dados
         } else {
           try {
             Gta gta = Gta(
@@ -192,9 +191,12 @@ class _EscanearPageState extends State<EscanearPage> {
         print('Erro ao adicionar dados ao Firestore: $e');
       }
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
           content: Text('Codigo de Barras Invalido'),
-          backgroundColor: const Color.fromARGB(255, 255, 0, 0)));
+          backgroundColor: const Color.fromARGB(255, 255, 0, 0),
+        ),
+      );
     }
   }
 
@@ -206,21 +208,21 @@ class _EscanearPageState extends State<EscanearPage> {
       ),
       body: Center(
         child: Column(
-          //11 14 728878 4 13062023 01 0000025 0 000051253 00189 8
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(_barcodeResult),
-            Text(_codigo),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: _scanBarcode,
               child: Text('Escanear Código de Barras'),
             ),
-            //  SizedBox(height: 20),
-            //  ElevatedButton(
-            //   onPressed: _salvar,
-            // child: Text('Salvar'),
-            //),
+            /**
+              SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _salvar,
+              child: Text('Salvar'),
+            ), 
+            */
           ],
         ),
       ),
