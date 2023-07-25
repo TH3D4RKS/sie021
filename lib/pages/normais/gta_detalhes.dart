@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../cidades/cidades.dart';
+import '../../cidades/data_list.dart';
 import '../../models/gta.dart';
 
 class GtasDetalhesPage extends StatelessWidget {
@@ -19,6 +19,18 @@ class GtasDetalhesPage extends StatelessWidget {
       if (uf['cod_uf'] == gta.uf) {
         String nomeuf = uf['nome'].toString();
         return nomeuf;
+      }
+    }
+  }
+
+  serie() {
+    for (var letra in alfabeto) {
+      print(letra);
+      if (letra['posicao'] == gta.serie) {
+        print(gta.serie);
+        print(letra);
+        String lserie = letra['letra'].toString();
+        return lserie;
       }
     }
   }
@@ -43,7 +55,7 @@ class GtasDetalhesPage extends StatelessWidget {
           Card(
             child: ListTile(
               title: Text('Código Gta'),
-              subtitle: Text('${gta.numeroGta}'),
+              subtitle: Text('${serie()}' ' ${gta.numeroGta}'),
             ),
           ),
           Card(
@@ -60,7 +72,7 @@ class GtasDetalhesPage extends StatelessWidget {
           ),
           Card(
             child: ListTile(
-              title: Text('Estado'),
+              title: Text('Estado Emissão'),
               subtitle: Text(uf()),
             ),
           ),

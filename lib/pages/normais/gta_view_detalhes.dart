@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../cidades/cidades.dart';
+import '../../cidades/data_list.dart';
 import '../../models/gta.dart';
 
 class GtasViewDetalhesPage extends StatelessWidget {

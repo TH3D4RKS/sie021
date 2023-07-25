@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../cidades/cidades.dart';
+import '../../cidades/data_list.dart';
 import '../../models/gta.dart';
 
 class GtasDupliDetalhesPage extends StatelessWidget {
@@ -20,6 +20,15 @@ class GtasDupliDetalhesPage extends StatelessWidget {
       if (uf['cod_uf'] == gtadupl.dupluf) {
         String nomeuf = uf['nome'].toString();
         return nomeuf;
+      }
+    }
+  }
+
+  sarie() {
+    for (var serie in alfabeto) {
+      if (serie['posicao'] == gtadupl.duplserie) {
+        String lserie = serie['letra'].toString();
+        return lserie;
       }
     }
   }
